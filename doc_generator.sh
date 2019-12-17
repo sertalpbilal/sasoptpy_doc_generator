@@ -38,7 +38,7 @@ for i in $comlist; do
     echo $mkdir_cmd
     $mkdir_cmd
 
-    copy_cmd="rsync --exclude 'version' --exclude '.git' -vazC doc_repo/ $folder/"
+    copy_cmd="rsync -avzC --exclude=version --exclude=.git doc_repo/ $folder/"
     echo $copy_cmd
     $copy_cmd
     

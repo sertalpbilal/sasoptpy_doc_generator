@@ -11,6 +11,7 @@ set -e
 (
     echo "*** Cleaning repository ***"
     cd gh-pages/sasoptpy
+    rm -rf version/
     git reset --hard
     git checkout gh-pages
     git clean -dfx
