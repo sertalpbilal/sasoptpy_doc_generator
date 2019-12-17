@@ -21,5 +21,5 @@ rsync -vazC package/doc/_build/html/ gh-pages/sasoptpy/
 
 echo "*** Adding old versions ***"
 dos2unix doc_generator.sh
-bash doc_generator.sh > doc_gen.log
+bash doc_generator.sh | tee doc_gen.log
 
