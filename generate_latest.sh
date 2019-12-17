@@ -4,7 +4,8 @@ set -e
 (
     cd package/doc
     echo "*** Generating docs @ develop ***"
-    #. makedocs.sh
+    dos2unix makedocs.sh
+    . makedocs.sh
 )
 
 (
@@ -19,5 +20,6 @@ set -e
 rsync -vazC package/doc/_build/html/ gh-pages/sasoptpy/
 
 echo "*** Adding old versions ***"
+dos2unix doc_generator.sh
 bash doc_generator.sh > doc_gen.log
 
