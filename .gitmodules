@@ -6,3 +6,7 @@
 	path = gh-pages/sasoptpy
 	url = https://github.com/sassoftware/sasoptpy.git
 	branch = gh-pages
+[submodule "package"]
+	path = package
+	url = https://github.com/sassoftware/sasoptpy.git
+	branch = develop
