@@ -1,0 +1,8 @@
+[submodule "doc_repo"]
+	path = doc_repo
+	url = https://github.com/sassoftware/sasoptpy.git
+	branch = gh-pages
+[submodule "gh-pages"]
+	path = gh-pages/sasoptpy
+	url = https://github.com/sassoftware/sasoptpy.git
+	branch = gh-pages
