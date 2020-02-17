@@ -5,7 +5,7 @@ html_pages = glob.glob('gh-pages/sasoptpy/**/*html', recursive=True)
 
 for i in html_pages:
     print('Processing', i)
-    f = open(i, 'r')
+    f = open(i, 'r', encoding='utf-8')
     alltext = f.readlines()
     f.close()
     if not r'version_switch' in alltext:
@@ -15,7 +15,8 @@ for i in html_pages:
                 alltext.insert(index+1, span_code)
             if r'</head>' in line:
                 headline = index
-        alltext.insert(headline-1, '<script src="/_static/js/version.js"></script>')
-        f = open(i, 'w')
+        relative = '../' * (i.count('/')-2)
+        alltext.insert(headline-1, '    <script src="{}_static/js/version.js"></script>\n'.format(relative))
+        f = open(i, 'w', encoding='utf-8')
         f.write("".join(alltext))
         f.close()
