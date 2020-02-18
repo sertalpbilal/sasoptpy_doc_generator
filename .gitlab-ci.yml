@@ -39,10 +39,11 @@ generate_version_doc:
     - python3 setup.py install
     - cd ..
     - ./generate_latest.sh
+    - ssh $FINALHOST "rm -rf $FINALDEST/*"
+    - scp -r gh-pages/sasoptpy $FINALHOST:$FINALDEST/
   artifacts:
     paths:
       - gh-pages/
-      - package/doc/_build/
-
+    expire_in: 24 hours
 
 
