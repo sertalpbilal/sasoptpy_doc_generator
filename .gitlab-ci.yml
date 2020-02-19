@@ -39,8 +39,12 @@ generate_version_doc:
     - python3 setup.py install
     - cd ..
     - ./generate_latest.sh
-    - ssh $FINALHOST "rm -rf $FINALDEST/*"
-    - scp -r gh-pages/sasoptpy $FINALHOST:$FINALDEST/
+    - cd gh-pages/sasoptpy
+    - git remote add gitlab $GITLAB_LINK || git remote show gitlab
+    - git fetch gitlab
+    - git add -A
+    - git checkout -b gh-candidate-$(date '+%Y%m%d-%H%M%S')
+    - git push gitlab -u HEAD
   artifacts:
     paths:
       - gh-pages/
