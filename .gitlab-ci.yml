@@ -45,5 +45,5 @@ generate_version_doc:
     paths:
       - gh-pages/
     expire_in: 24 hours
-
+  when: manual
 
