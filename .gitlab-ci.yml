@@ -34,8 +34,9 @@ generate_version_doc:
     - git remote remove gitlab || echo "Not exist"
     - git remote add gitlab $GITLAB_LINK || git remote show gitlab
     - git fetch gitlab
-    - git checkout $BRANCH
+    - echo $BRANCH
     - git pull gitlab $BRANCH
+    - git checkout $BRANCH
     - python3 setup.py install
     - cd ..
     - ./generate_latest.sh
