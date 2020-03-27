@@ -37,6 +37,8 @@ generate_version_doc:
     - echo $BRANCH
     - git pull gitlab $BRANCH
     - git checkout $BRANCH
+    - git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(refname:short) - %(objectname:short) - %(contents:subject) - %(authorname) (%(committerdate:relative))'
+    - git rev-parse HEAD
     - python3 setup.py install
     - cd ..
     - ./generate_latest.sh
