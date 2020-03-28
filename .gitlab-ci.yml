@@ -13,6 +13,8 @@ generate_version_doc:
     - scp $CASCOPY ~/
   script:
     - cd package
+    - git config --global user.email "root@docker"
+    - git config --global user.name "Docker"
     - git remote remove gitlab || echo "Not exist"
     - git remote add gitlab $GITLAB_LINK || git remote show gitlab
     - git checkout master
@@ -31,8 +33,6 @@ generate_version_doc:
     - git fetch gitlab
     - git add -A
     - git checkout -q -b gh-candidate-$(date '+%Y%m%d-%H%M%S')
-    - git config --global user.email "root@docker"
-    - git config --global user.name "Docker"
     - git commit -q -m "Documentation page update"
     - git push gitlab -u HEAD
   artifacts:
