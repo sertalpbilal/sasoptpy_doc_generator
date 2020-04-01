@@ -19,7 +19,7 @@ generate_version_doc:
     - git remote remove gitlab || echo "Not exist"
     - git remote add gitlab $GITLAB_LINK || git remote show gitlab
     - git fetch gitlab
-    - git checkout $BRANCH
+    - git checkout --track gitlab/$BRANCH
     - git pull gitlab $BRANCH
     - git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(refname:short) - %(objectname:short) - %(contents:subject) - %(authorname) (%(committerdate:relative))'
     - git rev-parse HEAD
