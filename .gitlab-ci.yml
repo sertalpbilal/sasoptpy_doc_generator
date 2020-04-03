@@ -23,7 +23,7 @@ generate_version_doc:
     - git pull gitlab $BRANCH
     - git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(refname:short) - %(objectname:short) - %(contents:subject) - %(authorname) (%(committerdate:relative))'
     - git rev-parse HEAD
-    - python3 setup.py install
+    - python3 setup.py install --force
     - cd ..
     - ./generate_latest.sh
     - cd gh-pages/sasoptpy
