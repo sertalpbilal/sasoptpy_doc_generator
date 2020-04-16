@@ -3,7 +3,11 @@ image: sertalpbilal/sphinx_dev:1.0.0
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
-generate_version_doc:
+stages:
+  - generate_docs
+  - push_to_github
+
+default:
   before_script:
     - 'which ssh-agent || ( apt install -qq -y openssh-client )'
     - eval $(ssh-agent -s)
@@ -11,6 +15,9 @@ generate_version_doc:
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - scp $CASCOPY ~/
+
+generate_version_doc:
+  stage: generate_docs
   script:
     - git submodule update --init --recursive
     - cd package
@@ -40,3 +47,22 @@ generate_version_doc:
       - gh-pages/
     expire_in: 24 hours
   when: manual
+
+github-pages:
+  stage: push_to_github
+  script:
+    - cd /
+    - rm -rf gh-pages; mkdir gh-pages; cd gh-pages
+    - git clone $GITLAB_LINK --branch gh-pages
+    - cd sasoptpy
+    - git fetch origin
+    - export LAST_CANDIDATE=`git branch -a | grep gh-candidate | tail -1 | cut -d'/' -f3`
+    - git checkout --track origin/$LAST_CANDIDATE
+    - git reset --soft gh-pages
+    - git add -A
+    - git checkout gh-pages
+    - git commit -m "Doc changes"
+    - git push origin gh-pages
+    - git remote add public $PUBLIC_LINK
+    - git fetch public
+    - git push -f public gh-pages
