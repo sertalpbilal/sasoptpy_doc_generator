@@ -61,8 +61,11 @@ github-pages:
     - git reset --soft gh-pages
     - git add -A
     - git checkout gh-pages
-    - git commit -m "Doc changes"
+    - git config --global user.email "root@docker"
+    - git config --global user.name "Docker"
+    - git commit -m "Doc update"
     - git push origin gh-pages
     - git remote add public $PUBLIC_LINK
     - git fetch public
     - git push -f public gh-pages
+  when: manual
